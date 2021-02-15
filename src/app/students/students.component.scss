@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  padding: 48px;
+  padding-bottom: 128px;
+}
+
+table {
+  width: 100%;
+}
+
+.filter {
+  display: flex;
+  gap: 4px;
+  padding: 16px;
+  margin-bottom: 24px;
+
+  mat-form-field.search {
+    flex-grow: 3;
+  }
+
+  mat-form-field {
+    flex-grow: 1;
+  }
+
+  ::ng-deep .mat-form-field {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+}
+
+eco-fab-speed-dial {
+  position: fixed;
+  right: 68px;
+  bottom: 48px;
+}
+
+.mat-column-actions {
+  text-align: right;
+
+  button {
+    filter: grayscale(1);
+    opacity: .4;
+    transition: filter 150ms ease-out, opacity 150ms ease-out;
+
+    &:hover {
+      filter: grayscale(0);
+      opacity: 1;
+    }
+  }
+}
+
+th.mat-column-actions {
+  width: 100px;
+}

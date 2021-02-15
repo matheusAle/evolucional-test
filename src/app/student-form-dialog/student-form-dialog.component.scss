@@ -1,0 +1,18 @@
+
+form {
+  width: 100%;
+  display: grid;
+  flex-direction: column;
+
+  fieldset {
+    display: flex;
+    gap: 16px;
+    border: unset;
+    padding: unset;
+  }
+}
+
+[mat-dialog-actions] {
+  display: flex;
+  justify-content: space-between;
+}

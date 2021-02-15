@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>
+  {{ student?.id ? 'Editar Estudante' : 'Cadastrar Estudante' }}
+</h1>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" autocomplete="off" (keydown.enter)="save()">
+      <mat-error *ngIf="form.controls.name.errors?.required">Insira o nome do estudante</mat-error>
+    </mat-form-field>
+    <fieldset>
+      <mat-form-field appearance="outline">
+        <mat-label>Gradução</mat-label>
+        <mat-select formControlName="degreeId">
+          <mat-option *ngFor="let degree of degrees$ | async" [value]="degree.id">
+            {{degree.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.degreeId.errors?.required">Selecione uma gradução</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Classe</mat-label>
+        <mat-select formControlName="classId">
+          <mat-option *ngFor="let clasz of classes$ | async" [value]="clasz.id">
+            {{clasz.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.classId.errors?.required">Selecione Uma classe</mat-error>
+      </mat-form-field>
+    </fieldset>
+  </form>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+</div>
