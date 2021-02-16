@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 16px;
+  align-items: center;
+}
+
+.counters {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+
+  .counter {
+    text-align: center;
+    padding: 24px 0;
+    flex-grow: 1;
+    font-weight: 300;
+
+    &__value {
+      font-size: 2rem;
+    }
+
+    &__label {
+      color: gray;
+    }
+
+    &:first-of-type {
+      border-right: 1px solid #e2e2e2;
+    }
+  }
+}

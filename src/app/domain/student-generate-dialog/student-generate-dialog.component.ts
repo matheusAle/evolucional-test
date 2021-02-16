@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {take} from 'rxjs/operators';
-import {IStudent} from '../interfaces/Student.interface';
-import {ClassService} from '../state/data/class.service';
-import {DegreeService} from '../state/data/degree.service';
-import {StudentService} from '../state/data/student.service';
+import {IStudent} from '../../interfaces/Student.interface';
+import {ClassService} from '../../state/data/class.service';
+import {DegreeService} from '../../state/data/degree.service';
+import {StudentService} from '../../state/data/student.service';
 import * as Faker from 'faker';
 
 @Component({

@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import {DefaultDataServiceConfig, EntityDataModule} from '@ngrx/data';
+import {SummaryModule} from './domain/summary/summary.module';
 import {defaultDataServiceConfig, entityConfig} from './entity-metadata';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ClassService} from './state/data/class.service';
@@ -16,6 +17,7 @@ import {DegreeService} from './state/data/degree.service';
 import {StudentService} from './state/data/student.service';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatTabsModule,
     StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SummaryModule
   ],
   providers: [
     {

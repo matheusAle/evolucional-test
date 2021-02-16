@@ -1,25 +1,25 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {BehaviorSubject, interval, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, interval, Observable, Subject, Subscription} from 'rxjs';
 import {debounce, map, switchMap} from 'rxjs/operators';
-import {IDegree} from '../interfaces/Degree.interface';
-import {IStudentPopulated} from '../interfaces/Student.interface';
-import {ClassService} from '../state/data/class.service';
-import {DegreeService} from '../state/data/degree.service';
-import {StudentService} from '../state/data/student.service';
-import {StudentDeleteDialogComponent} from '../student-delete-dialog/student-delete-dialog.component';
-import {StudentFormDialogComponent} from '../student-form-dialog/student-form-dialog.component';
-import {StudentGenerateDialogComponent} from '../student-generate-dialog/student-generate-dialog.component';
+import {IDegree} from '../../interfaces/Degree.interface';
+import {IStudentPopulated} from '../../interfaces/Student.interface';
+import {ClassService} from '../../state/data/class.service';
+import {DegreeService} from '../../state/data/degree.service';
+import {StudentService} from '../../state/data/student.service';
+import {StudentDeleteDialogComponent} from '../../domain/student-delete-dialog/student-delete-dialog.component';
+import {StudentFormDialogComponent} from '../../domain/student-form-dialog/student-form-dialog.component';
+import {StudentGenerateDialogComponent} from '../../domain/student-generate-dialog/student-generate-dialog.component';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss']
 })
-export class StudentsComponent implements OnInit, AfterViewInit {
-
+export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
+  private subscription = new Subscription();
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: (keyof IStudentPopulated | 'actions')[] = ['name', 'class', 'degree', 'actions'];
@@ -39,21 +39,29 @@ export class StudentsComponent implements OnInit, AfterViewInit {
     private degreeService: DegreeService,
     private dialog: MatDialog
   ) {
-    this.filter
-      .pipe(
-        switchMap(() => studentService.studentPopulated$),
-        map((students) => (
-          this.degrees?.length || this.classes?.length
-            ? students?.filter(item => this.degrees?.includes(item.degreeId) || this.classes?.includes(item.classId))
-            : students
-        ))
-      )
-      .subscribe(data => {
-        this.dataSource.data = data;
-      });
-    this.search.pipe(debounce(() => interval(300))).subscribe(str => {
-      this.dataSource.filter = str;
-    });
+    this.subscription.add(
+      this.filter
+        .pipe(
+          switchMap(() => studentService.studentPopulated$),
+          map((students) => (
+            this.degrees?.length || this.classes?.length
+              ? students?.filter(item => this.degrees?.includes(item.degreeId) || this.classes?.includes(item.classId))
+              : students
+          ))
+        )
+        .subscribe(data => {
+          this.dataSource.data = data;
+        })
+    );
+    this.subscription.add(
+      this.search
+        .pipe(
+          debounce(() => interval(300))
+        )
+        .subscribe(str => {
+          this.dataSource.filter = str;
+        })
+    );
   }
 
   ngOnInit(): void {
@@ -87,5 +95,11 @@ export class StudentsComponent implements OnInit, AfterViewInit {
 
   openGenerateStudents(): void {
     this.dialog.open(StudentGenerateDialogComponent);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.filter.complete();
+    this.search.complete();
   }
 }

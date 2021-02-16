@@ -2,10 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {IStudent} from '../interfaces/Student.interface';
-import {ClassService} from '../state/data/class.service';
-import {DegreeService} from '../state/data/degree.service';
-import {StudentService} from '../state/data/student.service';
+import {IStudent} from '../../interfaces/Student.interface';
+import {ClassService} from '../../state/data/class.service';
+import {DegreeService} from '../../state/data/degree.service';
+import {StudentService} from '../../state/data/student.service';
 
 @Component({
   selector: 'app-student-form-dialog',
