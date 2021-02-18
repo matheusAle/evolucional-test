@@ -1,82 +1,11 @@
 
-<div class="filter mat-elevation-z2">
-  <mat-form-field appearance="outline" class="search">
-    <mat-label>Buscar por name, classes ou gradução</mat-label>
-    <input matInput [ngModel]="''" (ngModelChange)="search.next($event)" autocomplete="off">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Classe</mat-label>
-    <mat-select multiple [(ngModel)]="classes" (ngModelChange)="filter.next('')">
-      <mat-option *ngFor="let clasz of classes$ | async" [value]="clasz.id">
-        {{clasz.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Gradução</mat-label>
-    <mat-select multiple [(ngModel)]="degrees" (ngModelChange)="filter.next('')">
-      <mat-option *ngFor="let degree of degrees$ | async" [value]="degree.id">
-        {{degree.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
-
-  <ng-container matColumnDef="name">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element" [innerHTML]="dataSource.filter | highlight:element.name"></td>
-  </ng-container>
-
-  <ng-container matColumnDef="degree">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef> Degree </th>
-    <td mat-cell *matCellDef="let element" [innerHTML]="dataSource.filter | highlight:element.degree.name"></td>
-  </ng-container>
-
-  <ng-container matColumnDef="class">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef> Class </th>
-    <td mat-cell *matCellDef="let element" [innerHTML]="dataSource.filter | highlight:element.class.name">
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <button
-        (click)="openStudentDialog(element)"
-        mat-icon-button color="primary" aria-label="Editar estudante"
-        matTooltip="Editar estudante"
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button
-        (click)="openStudentDeleteDialog(element)"
-        mat-icon-button color="warn" aria-label="Remover estudante"
-        matTooltip="Remover estudante"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<eco-fab-speed-dial>
-  <eco-fab-speed-dial-trigger>
-    <button mat-fab><mat-icon>add</mat-icon></button>
-  </eco-fab-speed-dial-trigger>
-
-  <eco-fab-speed-dial-actions>
-    <button mat-mini-fab matTooltip="Novo estudante" (click)="openStudentDialog()">
-      <mat-icon>person</mat-icon>
-    </button>
-    <button mat-mini-fab matTooltip="Gerar mais 300 estudantes" (click)="openGenerateStudents()">
-      <mat-icon>shuffle</mat-icon>
-    </button>
-  </eco-fab-speed-dial-actions>
-</eco-fab-speed-dial>
-
-
+<app-filter
+  searchLabel="Buscar por name, classes ou gradução"
+  (search)="list.search.next($event)"
+  [(classes)]="list.classes" (classesChange)="list.filter.next('')"
+  [(degrees)]="list.degrees" (degreesChange)="list.filter.next('')"
+></app-filter>
+<app-students-list
+  [items]="students$ | async"
+  #list
+></app-students-list>

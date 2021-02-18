@@ -33,4 +33,10 @@ export class StudentService extends EntityCollectionServiceBase<IStudent> {
   ) {
     super('Student', serviceElementsFactory);
   }
+
+  ofDegree(degreeId: number, classId: number): Observable<IStudentPopulated[]> {
+    return this.studentPopulated$.pipe(
+      map(students => students.filter(student => student.classId === classId && student.degreeId === degreeId))
+    );
+  }
 }

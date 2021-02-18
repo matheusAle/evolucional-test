@@ -1,0 +1,74 @@
+<form [formGroup]="form">
+  <fieldset>
+    <mat-form-field appearance="outline">
+      <mat-label>Professor</mat-label>
+      <mat-select formControlName="teacherId">
+        <mat-option *ngFor="let teacher of teachers$ | async" [value]="teacher.id">
+          {{teacher.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls.teacherId?.errors?.required">Selecione um professor</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Materia</mat-label>
+      <mat-select formControlName="matterId">
+        <mat-option *ngFor="let matter of matters$ | async" [value]="matter.id">
+          {{matter.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls.matterId?.errors?.required">Selecione uma materia</mat-error>
+    </mat-form-field>
+  </fieldset>
+  <div formArrayName="degrees" class="degrees">
+    <fieldset
+      *ngFor="let group of degreesArray.controls; let index = index"
+      @degree
+      [formGroupName]="index"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Gaduação</mat-label>
+        <mat-select formControlName="degreeId">
+          <mat-option *ngFor="let degree of degrees$ | async" [value]="degree.id">
+            {{degree.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="$any(group).controls.degreeId?.errors?.required">Selecione um gaduação</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Classes</mat-label>
+        <mat-select formControlName="classes" multiple>
+          <mat-option *ngFor="let clasz of classes$ | async" [value]="{ classId: clasz.id }">
+            {{clasz.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="$any(group).controls.classes?.errors?.required">Selecione classe</mat-error>
+      </mat-form-field>
+      <button
+        mat-icon-button color="warn"
+        (click)="removeDegree(index)"
+        aria-label="Remover Gradução" matTooltip="Remover Gradução"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </fieldset>
+
+    <button
+      mat-mini-fab
+      type="button"
+      (click)="addDegree()"
+      aria-label="Adicionar Gradução" matTooltip="Adicionar Gradução"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</form>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button color="primary"
+    (click)="save()"
+    aria-label="Adicionar Relacionamento"
+  >
+    Salvar
+  </button>
+</div>

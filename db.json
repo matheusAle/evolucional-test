@@ -238,6 +238,82 @@
           ]
         }
       ]
+    },
+    {
+      "teacherId": 5,
+      "matterId": 3,
+      "degrees": [
+        {
+          "degreeId": 2,
+          "classes": [
+            {
+              "classId": 2
+            },
+            {
+              "classId": 4
+            }
+          ]
+        },
+        {
+          "degreeId": 3,
+          "classes": [
+            {
+              "classId": 3
+            },
+            {
+              "classId": 4
+            }
+          ]
+        }
+      ],
+      "id": 5
+    },
+    {
+      "teacherId": 2,
+      "matterId": 3,
+      "degrees": [
+        {
+          "degreeId": 3,
+          "classes": [
+            {
+              "classId": 2
+            }
+          ]
+        },
+        {
+          "degreeId": 2,
+          "classes": [
+            {
+              "classId": 3
+            },
+            {
+              "classId": 4
+            }
+          ]
+        }
+      ],
+      "id": 6
+    },
+    {
+      "teacherId": 3,
+      "matterId": 3,
+      "degrees": [
+        {
+          "degreeId": 2,
+          "classes": [
+            {
+              "classId": 2
+            },
+            {
+              "classId": 3
+            },
+            {
+              "classId": 4
+            }
+          ]
+        }
+      ],
+      "id": 7
     }
   ],
   "students": [
@@ -246,14 +322,14 @@
       "ra": 12346,
       "name": "Nome do aluno 1",
       "degreeId": 1,
-      "classId": 1
+      "classId": 4
     },
     {
       "id": 2,
       "ra": 456798,
       "name": "Nome do aluno 2",
       "degreeId": 2,
-      "classId": 1
+      "classId": 2
     },
     {
       "id": 3,
@@ -265,7 +341,7 @@
     {
       "id": 4,
       "ra": 852348,
-      "name": "Nome do aluno 4",
+      "name": "Nome do aluno 4 edited",
       "degreeId": 4,
       "classId": 2
     },

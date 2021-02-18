@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {map} from 'rxjs/operators';
+import {StudentService} from '../../state/data/student.service';
 
 @Component({
   selector: 'app-summary',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor() { }
+  count$ = this.studentService.entities$.pipe(
+    map(list => list?.length || 0)
+  )
+
+  constructor(
+    private studentService: StudentService
+  ) { }
 
   ngOnInit(): void {
   }

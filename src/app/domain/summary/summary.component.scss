@@ -10,11 +10,16 @@
   flex-grow: 1;
   justify-content: space-around;
 
+  > * {
+    flex-grow: 1;
+  }
+
   .counter {
     text-align: center;
     padding: 24px 0;
-    flex-grow: 1;
     font-weight: 300;
+    border-right: 1px solid #e2e2e2;
+    border-left: 1px solid #e2e2e2;
 
     &__value {
       font-size: 2rem;
@@ -24,8 +29,5 @@
       color: gray;
     }
 
-    &:first-of-type {
-      border-right: 1px solid #e2e2e2;
-    }
   }
 }

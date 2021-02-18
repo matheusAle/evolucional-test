@@ -18,88 +18,13 @@ import {StudentGenerateDialogComponent} from '../../domain/student-generate-dial
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss']
 })
-export class StudentsComponent implements OnInit, AfterViewInit, OnDestroy {
-  private subscription = new Subscription();
-  @ViewChild(MatSort) sort: MatSort;
+export class StudentsComponent {
 
-  displayedColumns: (keyof IStudentPopulated | 'actions')[] = ['name', 'class', 'degree', 'actions'];
-  dataSource = new MatTableDataSource();
-
-  search = new Subject<string>();
-
-  degrees$ = this.degreeService.entities$;
-  classes$ = this.classService.entities$;
-  filter = new BehaviorSubject<any>(null);
+  students$ = this.studentService.studentPopulated$;
   degrees: number[] = [];
   classes: number[] = [];
 
   constructor(
     private studentService: StudentService,
-    private classService: ClassService,
-    private degreeService: DegreeService,
-    private dialog: MatDialog
-  ) {
-    this.subscription.add(
-      this.filter
-        .pipe(
-          switchMap(() => studentService.studentPopulated$),
-          map((students) => (
-            this.degrees?.length || this.classes?.length
-              ? students?.filter(item => this.degrees?.includes(item.degreeId) || this.classes?.includes(item.classId))
-              : students
-          ))
-        )
-        .subscribe(data => {
-          this.dataSource.data = data;
-        })
-    );
-    this.subscription.add(
-      this.search
-        .pipe(
-          debounce(() => interval(300))
-        )
-        .subscribe(str => {
-          this.dataSource.filter = str;
-        })
-    );
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.filterPredicate = (item: IStudentPopulated, property) => {
-      return `${item.name}${item.degree.name}${item.class.name}`.toLowerCase().includes(String(property || '').toLowerCase());
-    };
-    this.dataSource.sortingDataAccessor = (item: IStudentPopulated, property) => {
-      switch (property) {
-        case 'degree': return item.degree.name;
-        case 'class': return item.class.name;
-        default: return item[property];
-      }
-    };
-    this.dataSource.sort = this.sort;
-  }
-
-  openStudentDialog(student?: IStudentPopulated): void {
-    this.dialog.open(StudentFormDialogComponent, {
-      data: JSON.parse(JSON.stringify({ ...(student || {}), degree: undefined, class: undefined }))
-    });
-  }
-
-  openStudentDeleteDialog(student: IStudentPopulated): void {
-    this.dialog.open(StudentDeleteDialogComponent, {
-      data: student
-    });
-  }
-
-  openGenerateStudents(): void {
-    this.dialog.open(StudentGenerateDialogComponent);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    this.filter.complete();
-    this.search.complete();
-  }
+  ) { }
 }

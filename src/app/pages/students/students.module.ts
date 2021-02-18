@@ -10,6 +10,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {EcoFabSpeedDialModule} from '@ecodev/fab-speed-dial';
+import {FilterModule} from '../../components/filter/filter.module';
+import {StudentsListModule} from '../../domain/students-list/students-list.module';
 import {HighlightModule} from '../../pipes/highlight/highlight.module';
 import {StudentDeleteDialogModule} from '../../domain/student-delete-dialog/student-delete-dialog.module';
 import {StudentFormDialogModule} from '../../domain/student-form-dialog/student-form-dialog.module';
@@ -21,22 +23,24 @@ import { StudentsComponent } from './students.component';
 @NgModule({
   declarations: [StudentsComponent],
   exports: [StudentsComponent],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    HighlightModule,
-    MatSelectModule,
-    EcoFabSpeedDialModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    StudentFormDialogModule,
-    StudentDeleteDialogModule,
-    StudentGenerateDialogModule
-  ]
+    imports: [
+        CommonModule,
+        MatTableModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        HighlightModule,
+        MatSelectModule,
+        EcoFabSpeedDialModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        StudentFormDialogModule,
+        StudentDeleteDialogModule,
+        StudentGenerateDialogModule,
+        StudentsListModule,
+        FilterModule
+    ]
 })
 export class StudentsModule { }
