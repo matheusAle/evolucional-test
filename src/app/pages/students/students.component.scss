@@ -1,3 +1,10 @@
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+app-students-list {
+  flex-grow: 1;
 }

@@ -1,4 +1,4 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +14,7 @@ import {ToolbarModule} from './components/toolbar/toolbar.module';
 import {SummaryModule} from './domain/summary/summary.module';
 import {defaultDataServiceConfig, entityConfig} from './entity-metadata';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AuthInterceptor} from './http-intercepts/auth.interceptor';
 import {ClassService} from './state/data/class.service';
 import {DegreeService} from './state/data/degree.service';
 import {MatterService} from './state/data/matter.service';
@@ -45,10 +46,16 @@ import {TeacherService} from './state/data/teacher.service';
     ToolbarModule
   ],
   providers: [
+    AuthInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     {
       provide: DefaultDataServiceConfig,
       useValue: defaultDataServiceConfig,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

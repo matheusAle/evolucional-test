@@ -1,8 +1,12 @@
 :host {
-  display: block;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .content {
   background-color: #f8f8f8;
   padding: 48px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

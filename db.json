@@ -341,7 +341,7 @@
     {
       "id": 4,
       "ra": 852348,
-      "name": "Nome do aluno 4 edited",
+      "name": "Nome do aluno 4",
       "degreeId": 4,
       "classId": 2
     },
@@ -351,24 +351,6 @@
       "name": "Nome do aluno 5",
       "degreeId": 6,
       "classId": 2
-    },
-    {
-      "name": "Jamarcus Casper edited",
-      "classId": 1,
-      "degreeId": 8,
-      "id": 8
-    },
-    {
-      "name": "Juliana Leffler",
-      "classId": 1,
-      "degreeId": 11,
-      "id": 9
-    },
-    {
-      "name": "Delbert Jaskolski edited",
-      "classId": 5,
-      "degreeId": 1,
-      "id": 10
     }
   ],
   "teachers": [

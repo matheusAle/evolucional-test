@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BehaviorSubject, interval, Observable, Subject, Subscription} from 'rxjs';
-import {debounce, map, switchMap} from 'rxjs/operators';
+import {debounce, map, switchMap, tap} from 'rxjs/operators';
 import {IDegree} from '../../interfaces/Degree.interface';
 import {IStudentPopulated} from '../../interfaces/Student.interface';
 import {ClassService} from '../../state/data/class.service';

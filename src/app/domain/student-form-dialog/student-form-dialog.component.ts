@@ -61,7 +61,7 @@ export class StudentFormDialogComponent implements OnInit {
     const sub = (body.id ? this.studentService.update(body) : this.studentService.add(body))
       .subscribe(() => {
         sub.unsubscribe();
-        if (this.student.id && typeof this.student.id === 'string') {
+        if (this.student?.id && typeof this.student.id === 'string') {
           this.studentService.removeOneFromCache(this.student);
         }
         if (body.id) {

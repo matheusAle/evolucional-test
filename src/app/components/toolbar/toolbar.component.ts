@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {RelationshipFormDialogComponent} from '../../domain/relationship-form-dialog/relationship-form-dialog.component';
-import {StudentDeleteDialogComponent} from '../../domain/student-delete-dialog/student-delete-dialog.component';
 import {StudentFormDialogComponent} from '../../domain/student-form-dialog/student-form-dialog.component';
 import {StudentGenerateDialogComponent} from '../../domain/student-generate-dialog/student-generate-dialog.component';
-import {IStudentPopulated} from '../../interfaces/Student.interface';
 
 @Component({
   selector: 'app-toolbar',
   template: `
     <mat-toolbar color="primary">
-      <span>My Application</span>
+      <span>Evolucional</span>
       <div>
         <button mat-icon-button matTooltip="Novo estudante" (click)="openStudentDialog()">
           <mat-icon>person</mat-icon>

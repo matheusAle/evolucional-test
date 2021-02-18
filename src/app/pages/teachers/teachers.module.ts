@@ -18,8 +18,6 @@ import {EcoFabSpeedDialModule} from '@ecodev/fab-speed-dial';
 import {FilterModule} from '../../components/filter/filter.module';
 import {ClassStudentsModule} from '../../domain/class-students/class-students.module';
 import {StudentsListModule} from '../../domain/students-list/students-list.module';
-import {TeacherDegreeClassModule} from '../../domain/teacher-degree-class/teacher-degree-class.module';
-import {TeacherDegreesModule} from '../../domain/teacher-degrees/teacher-degrees.module';
 import {HighlightModule} from '../../pipes/highlight/highlight.module';
 import { TeachersComponent } from './teachers.component';
 
@@ -42,10 +40,8 @@ import { TeachersComponent } from './teachers.component';
         ScrollingModule,
         CdkAccordionModule,
         MatExpansionModule,
-        TeacherDegreesModule,
         MatChipsModule,
         MatTabsModule,
-        TeacherDegreeClassModule,
         StudentsListModule,
         ClassStudentsModule,
         FilterModule,
